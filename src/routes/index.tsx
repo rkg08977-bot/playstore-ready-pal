@@ -35,22 +35,31 @@ function Index() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden bg-gradient-hero">
         <div className="absolute inset-0">
-          <img src={heroImg} alt="" className="h-full w-full object-cover opacity-40" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/30" />
-          <div className="absolute inset-0 grid-pattern opacity-20" />
+          <img
+            src={heroImg}
+            alt=""
+            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+            className="h-full w-full object-cover opacity-50"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
+          <div className="absolute inset-0 grid-pattern" />
+          <div className="absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-primary/10 blur-[120px]" />
+          <div className="absolute -right-32 bottom-1/4 h-96 w-96 rounded-full bg-primary/15 blur-[140px]" />
         </div>
         <div className="relative mx-auto grid min-h-[88vh] max-w-7xl items-center px-4 py-20 md:px-8">
           <div className="max-w-3xl">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary backdrop-blur">
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-card/80 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary backdrop-blur">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
               Delivering across {city}
             </motion.div>
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}
               className="text-5xl font-black leading-[0.95] md:text-7xl lg:text-8xl">
-              {heroTitle}
+              <span className="text-foreground">{heroTitle.split(' ').slice(0, -1).join(' ')} </span>
+              <span className="text-gradient">{heroTitle.split(' ').slice(-1)}</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
               className="mt-6 max-w-xl text-lg text-muted-foreground md:text-xl">
@@ -58,12 +67,21 @@ function Index() {
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.45 }}
               className="mt-10 flex flex-wrap gap-4">
-              <Button asChild size="lg" className="h-14 bg-primary px-8 text-base font-bold uppercase tracking-wider hover:shadow-glow">
+              <Button asChild size="lg" className="h-14 bg-gradient-primary px-8 text-base font-bold uppercase tracking-wider text-primary-foreground hover:shadow-glow hover:opacity-95">
                 <Link to="/products">Shop Materials <ArrowRight className="ml-1 h-5 w-5" /></Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="h-14 border-border px-8 text-base font-bold uppercase tracking-wider hover:border-primary hover:text-primary">
+              <Button asChild size="lg" variant="outline" className="h-14 border-primary/40 bg-background/40 px-8 text-base font-bold uppercase tracking-wider text-foreground backdrop-blur hover:border-primary hover:text-primary">
                 <Link to="/contact">Get a Quote</Link>
               </Button>
+            </motion.div>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.6 }}
+              className="mt-12 flex flex-wrap gap-8 border-t border-border/50 pt-8">
+              {[{n:"500+",l:"Builders Trust Us"},{n:"50K+",l:"Tonnes Delivered"},{n:"24h",l:"Fast Dispatch"}].map((s)=>(
+                <div key={s.l}>
+                  <div className="text-3xl font-black text-gradient md:text-4xl">{s.n}</div>
+                  <div className="text-xs uppercase tracking-widest text-muted-foreground">{s.l}</div>
+                </div>
+              ))}
             </motion.div>
           </div>
         </div>
