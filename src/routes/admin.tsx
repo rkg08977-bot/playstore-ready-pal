@@ -145,12 +145,12 @@ function ProductsTab() {
     if (!editing) return;
     let specs: { label: string; value: string }[] = [];
     try { specs = JSON.parse(specsText || "[]"); } catch { toast.error("Specs must be valid JSON"); return; }
-    const payload: Record<string, unknown> = {
+    const payload = {
       slug: editing.slug, name: editing.name, brand: editing.brand, category_slug: editing.category_slug,
       price: Number(editing.price), unit: editing.unit, min_order: Number(editing.min_order),
       image_url: editing.image_url, rating: Number(editing.rating ?? 4.5), description: editing.description,
       specs, in_stock: editing.in_stock, active: editing.active, sort_order: Number(editing.sort_order ?? 0),
-    };
+    } as never;
     const { error } = editing.id
       ? await supabase.from("products").update(payload).eq("id", editing.id)
       : await supabase.from("products").insert(payload);
@@ -241,7 +241,7 @@ function OrdersTab() {
   useEffect(() => { load(); }, []);
 
   const updateStatus = async (id: string, status: string) => {
-    const { error } = await supabase.from("orders").update({ status }).eq("id", id);
+    const { error } = await supabase.from("orders").update({ status } as never).eq("id", id);
     if (error) toast.error(error.message);
     else { toast.success("Status updated"); load(); }
   };
@@ -262,7 +262,7 @@ function OrdersTab() {
             </div>
             <div className="text-right">
               <div className="text-xl font-black">{formatINR(Number(o.total))}</div>
-              <Select value={o.status} onValueChange={(v) => updateStatus(o.id, v)}>
+              <Select value={o.status as string} onValueChange={(v) => updateStatus(o.id, v)}>
                 <SelectTrigger className="mt-2 w-44"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   {["pending","confirmed","out_for_delivery","delivered","cancelled"].map((s) => <SelectItem key={s} value={s}>{s.replace("_"," ")}</SelectItem>)}
@@ -293,8 +293,8 @@ function TestimonialsTab() {
 
   const save = async () => {
     if (!editing) return;
-    const payload = { author_name: editing.author_name, author_role: editing.author_role, content: editing.content,
-      rating: Number(editing.rating ?? 5), approved: editing.approved ?? true, sort_order: Number(editing.sort_order ?? 0) };
+    const payload = { author_name: editing.author_name ?? "", author_role: editing.author_role ?? null, content: editing.content ?? "",
+      rating: Number(editing.rating ?? 5), approved: editing.approved ?? true, sort_order: Number(editing.sort_order ?? 0) } as never;
     const { error } = editing.id
       ? await supabase.from("testimonials").update(payload).eq("id", editing.id)
       : await supabase.from("testimonials").insert(payload);
