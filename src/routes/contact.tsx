@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { DELIVERY } from "@/lib/products";
+import { useSiteSettings } from "@/lib/queries";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -19,6 +19,11 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const { data: s } = useSiteSettings();
+  const city = s?.city ?? "Mumbai";
+  const radius = s?.delivery_radius_km ?? 20;
+  const phone = s?.phone ?? "+91 98765 43210";
+  const email = s?.email ?? "orders@buildhub.in";
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     toast.success("Message sent! We'll get back to you within 2 hours.");
@@ -51,9 +56,9 @@ function ContactPage() {
 
         <aside className="space-y-4">
           {[
-            { Icon: Phone, t: "Call Us", v: "+91 98765 43210", s: "Mon–Sat, 8 AM – 8 PM" },
-            { Icon: Mail, t: "Email", v: "orders@buildhub.in", s: "We reply within 2 hours" },
-            { Icon: MapPin, t: "Visit", v: `${DELIVERY.city}, India`, s: `Within ${DELIVERY.radiusKm}km radius` },
+            { Icon: Phone, t: "Call Us", v: phone, s: "Mon–Sat, 8 AM – 8 PM" },
+            { Icon: Mail, t: "Email", v: email, s: "We reply within 2 hours" },
+            { Icon: MapPin, t: "Visit", v: `${city}, India`, s: `Within ${radius}km radius` },
             { Icon: Clock, t: "Hours", v: "Mon – Sat", s: "8:00 AM – 8:00 PM" },
           ].map(({ Icon, t, v, s }) => (
             <div key={t} className="rounded-lg border border-border bg-card p-5">
