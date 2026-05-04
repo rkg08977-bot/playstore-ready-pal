@@ -4,12 +4,12 @@ import { useState } from "react";
 import { Minus, Plus, ShoppingCart, ArrowLeft, Truck, ShieldCheck, Star, Check } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { getProduct, PRODUCTS, DELIVERY } from "@/lib/products";
+import { getProduct, PRODUCTS, DELIVERY, type Product } from "@/lib/products";
 import { useCart, formatINR } from "@/lib/cart";
 import { ProductCard } from "@/components/product-card";
 
 export const Route = createFileRoute("/products/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { product: Product } => {
     const product = getProduct(params.slug);
     if (!product) throw notFound();
     return { product };
