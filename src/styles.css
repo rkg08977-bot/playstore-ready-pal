@@ -46,6 +46,10 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
+  --color-brand-red: var(--brand-red);
+  --color-brand-red-foreground: var(--brand-red-foreground);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-foreground: var(--brand-blue-foreground);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -84,9 +88,15 @@
   --border: oklch(0.18 0.01 80 / 0.18);
   --input: oklch(0.99 0.01 95);
   --ring: oklch(0.18 0.01 80);
+  /* Brand accent colors — bold red & deep blue for highlights */
+  --brand-red: oklch(0.58 0.23 27);
+  --brand-red-foreground: oklch(0.98 0.01 80);
+  --brand-blue: oklch(0.45 0.22 258);
+  --brand-blue-foreground: oklch(0.98 0.01 80);
   --gradient-primary: linear-gradient(135deg, oklch(0.18 0.01 80), oklch(0.28 0.02 80));
   --gradient-dark: linear-gradient(180deg, oklch(0.18 0.01 80), oklch(0.10 0.01 80));
   --gradient-hero: linear-gradient(120deg, oklch(0.97 0.20 102) 0%, oklch(0.93 0.22 100) 50%, oklch(0.97 0.20 102) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--brand-red), var(--brand-blue));
   --shadow-glow: 0 20px 60px -15px oklch(0.18 0.01 80 / 0.35);
   --shadow-elegant: 0 20px 50px -15px oklch(0.18 0.01 80 / 0.25);
   --chart-1: oklch(0.646 0.222 41.116);
@@ -168,6 +178,13 @@
   .bg-gradient-primary { background: var(--gradient-primary); }
   .bg-gradient-dark { background: var(--gradient-dark); }
   .bg-gradient-hero { background: var(--gradient-hero); }
+  .bg-gradient-accent { background: var(--gradient-accent); }
+  .text-brand-red { color: var(--brand-red); }
+  .text-brand-blue { color: var(--brand-blue); }
+  .bg-brand-red { background-color: var(--brand-red); color: var(--brand-red-foreground); }
+  .bg-brand-blue { background-color: var(--brand-blue); color: var(--brand-blue-foreground); }
+  .border-brand-red { border-color: var(--brand-red); }
+  .border-brand-blue { border-color: var(--brand-blue); }
   .shadow-glow { box-shadow: var(--shadow-glow); }
   .shadow-elegant { box-shadow: var(--shadow-elegant); }
   .grid-pattern {
