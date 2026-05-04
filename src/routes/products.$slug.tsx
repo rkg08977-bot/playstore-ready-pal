@@ -97,7 +97,7 @@ function ProductDetail() {
             </div>
             <div className="flex items-center gap-3">
               <div className="flex items-center rounded-md border border-border">
-                <button onClick={() => setQty((q) => Math.max(product.minOrder, q - 1))} className="flex h-12 w-12 items-center justify-center hover:bg-secondary" aria-label="Decrease">
+                <button onClick={() => setQty((q: number) => Math.max(product.minOrder, q - 1))} className="flex h-12 w-12 items-center justify-center hover:bg-secondary" aria-label="Decrease">
                   <Minus className="h-4 w-4" />
                 </button>
                 <input
@@ -106,7 +106,7 @@ function ProductDetail() {
                   onChange={(e) => setQty(Math.max(1, Number(e.target.value) || 1))}
                   className="h-12 w-20 border-x border-border bg-transparent text-center font-bold focus:outline-none"
                 />
-                <button onClick={() => setQty((q) => q + 1)} className="flex h-12 w-12 items-center justify-center hover:bg-secondary" aria-label="Increase">
+                <button onClick={() => setQty((q: number) => q + 1)} className="flex h-12 w-12 items-center justify-center hover:bg-secondary" aria-label="Increase">
                   <Plus className="h-4 w-4" />
                 </button>
               </div>
@@ -139,7 +139,7 @@ function ProductDetail() {
           <div className="mt-8">
             <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-primary">Specifications</h2>
             <dl className="overflow-hidden rounded-lg border border-border">
-              {product.specs.map((s, i) => (
+              {product.specs.map((s: { label: string; value: string }, i: number) => (
                 <div key={s.label} className={`flex justify-between p-4 text-sm ${i % 2 === 0 ? "bg-card" : "bg-background"}`}>
                   <dt className="text-muted-foreground">{s.label}</dt>
                   <dd className="font-bold">{s.value}</dd>
