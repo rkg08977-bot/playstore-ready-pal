@@ -64,21 +64,21 @@
 :root {
   --radius: 0.5rem;
   /* Hi-Vis Industrial — warm yellow + deep charcoal. Premium construction palette. */
-  --background: oklch(0.93 0.13 95);
+  --background: oklch(0.96 0.21 102);
   --foreground: oklch(0.16 0.01 80);
   --card: oklch(0.99 0.01 95);
   --card-foreground: oklch(0.16 0.01 80);
   --popover: oklch(0.99 0.01 95);
   --popover-foreground: oklch(0.16 0.01 80);
   --primary: oklch(0.18 0.01 80);
-  --primary-foreground: oklch(0.93 0.13 95);
+  --primary-foreground: oklch(0.96 0.21 102);
   --primary-glow: oklch(0.28 0.02 80);
-  --secondary: oklch(0.96 0.06 95);
+  --secondary: oklch(0.98 0.12 100);
   --secondary-foreground: oklch(0.16 0.01 80);
-  --muted: oklch(0.94 0.05 95);
+  --muted: oklch(0.97 0.10 100);
   --muted-foreground: oklch(0.36 0.02 80);
   --accent: oklch(0.18 0.01 80);
-  --accent-foreground: oklch(0.93 0.13 95);
+  --accent-foreground: oklch(0.96 0.21 102);
   --destructive: oklch(0.55 0.22 27);
   --destructive-foreground: oklch(0.98 0.01 80);
   --border: oklch(0.18 0.01 80 / 0.18);
@@ -86,7 +86,7 @@
   --ring: oklch(0.18 0.01 80);
   --gradient-primary: linear-gradient(135deg, oklch(0.18 0.01 80), oklch(0.28 0.02 80));
   --gradient-dark: linear-gradient(180deg, oklch(0.18 0.01 80), oklch(0.10 0.01 80));
-  --gradient-hero: linear-gradient(120deg, oklch(0.95 0.14 95) 0%, oklch(0.90 0.16 92) 50%, oklch(0.95 0.14 95) 100%);
+  --gradient-hero: linear-gradient(120deg, oklch(0.97 0.20 102) 0%, oklch(0.93 0.22 100) 50%, oklch(0.97 0.20 102) 100%);
   --shadow-glow: 0 20px 60px -15px oklch(0.18 0.01 80 / 0.35);
   --shadow-elegant: 0 20px 50px -15px oklch(0.18 0.01 80 / 0.25);
   --chart-1: oklch(0.646 0.222 41.116);
