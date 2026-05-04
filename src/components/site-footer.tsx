@@ -40,10 +40,10 @@ export function SiteFooter() {
         <div>
           <h4 className="mb-4 text-sm font-bold tracking-widest text-foreground">Reach Us</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 text-primary" /> <span>{city}, India</span></li>
-            <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 text-primary" /> <span>{phone}</span></li>
-            <li className="flex items-start gap-2"><Mail className="mt-0.5 h-4 w-4 text-primary" /> <span>{email}</span></li>
-            <li className="flex items-start gap-2"><Truck className="mt-0.5 h-4 w-4 text-primary" /> <span>Within {radius}km</span></li>
+            <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 text-primary" /><span>{city}, India</span></li>
+            <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 text-primary" /><span>{phone}</span></li>
+            <li className="flex items-start gap-2"><Mail className="mt-0.5 h-4 w-4 text-primary" /><span>{email}</span></li>
+            <li className="flex items-start gap-2"><Truck className="mt-0.5 h-4 w-4 text-primary" /><span>Within {radius}km</span></li>
           </ul>
         </div>
       </div>

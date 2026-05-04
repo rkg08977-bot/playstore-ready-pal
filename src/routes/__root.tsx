@@ -32,7 +32,7 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "theme-color", content: "#1a1a1a" },
+      { name: "theme-color", content: "#ffffff" },
       { title: "BuildHub — Cement, TMT Bars & Construction Materials" },
       { name: "description", content: "Order premium cement, TMT bars, bricks & aggregates online. Fast delivery." },
       { property: "og:title", content: "BuildHub — Construction Materials Delivered" },
@@ -70,7 +70,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  const [qc] = useState(() => new QueryClient({ defaultOptions: { queries: { staleTime: 30_000, refetchOnWindowFocus: false } } }));
+  const [qc] = useState(() => new QueryClient({ defaultOptions: { queries: { staleTime: 5 * 60_000, gcTime: 30 * 60_000, refetchOnWindowFocus: false, retry: 1 } } }));
   return (
     <QueryClientProvider client={qc}>
       <AuthProvider>
@@ -80,7 +80,7 @@ function RootComponent() {
             <Outlet />
           </main>
           <SiteFooter />
-          <Toaster theme="dark" position="top-center" />
+          <Toaster theme="light" position="top-center" />
         </div>
       </AuthProvider>
     </QueryClientProvider>
