@@ -1,15 +1,21 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { PRODUCTS, type Product, calcDelivery } from "./products";
 
 export type CartItem = {
   productId: string;
+  slug: string;
+  name: string;
+  brand: string | null;
+  price: number;
+  unit: string;
+  image: string | null;
+  minOrder: number;
   quantity: number;
 };
 
 type CartState = {
   items: CartItem[];
-  add: (productId: string, quantity: number) => void;
+  add: (item: Omit<CartItem, "quantity">, quantity: number) => void;
   setQty: (productId: string, quantity: number) => void;
   remove: (productId: string) => void;
   clear: () => void;
@@ -19,17 +25,17 @@ export const useCart = create<CartState>()(
   persist(
     (set) => ({
       items: [],
-      add: (productId, quantity) =>
+      add: (item, quantity) =>
         set((s) => {
-          const existing = s.items.find((i) => i.productId === productId);
+          const existing = s.items.find((i) => i.productId === item.productId);
           if (existing) {
             return {
               items: s.items.map((i) =>
-                i.productId === productId ? { ...i, quantity: i.quantity + quantity } : i,
+                i.productId === item.productId ? { ...i, quantity: i.quantity + quantity } : i,
               ),
             };
           }
-          return { items: [...s.items, { productId, quantity }] };
+          return { items: [...s.items, { ...item, quantity }] };
         }),
       setQty: (productId, quantity) =>
         set((s) => ({
@@ -41,28 +47,16 @@ export const useCart = create<CartState>()(
         set((s) => ({ items: s.items.filter((i) => i.productId !== productId) })),
       clear: () => set({ items: [] }),
     }),
-    { name: "buildhub-cart" },
+    { name: "buildhub-cart-v2" },
   ),
 );
 
-export function getCartDetails(items: CartItem[]) {
-  const lines = items
-    .map((i) => {
-      const product = PRODUCTS.find((p) => p.id === i.productId);
-      if (!product) return null;
-      return { product, quantity: i.quantity, subtotal: product.price * i.quantity };
-    })
-    .filter((x): x is { product: Product; quantity: number; subtotal: number } => x !== null);
-  const subtotal = lines.reduce((sum, l) => sum + l.subtotal, 0);
-  const delivery = calcDelivery(subtotal);
-  const total = subtotal + delivery;
-  return { lines, subtotal, delivery, total };
+export function calcCart(items: CartItem[], freeAbove: number, charge: number) {
+  const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
+  const delivery = items.length === 0 ? 0 : subtotal >= freeAbove ? 0 : charge;
+  return { subtotal, delivery, total: subtotal + delivery };
 }
 
 export function formatINR(amount: number) {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  }).format(amount);
+  return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(amount);
 }
